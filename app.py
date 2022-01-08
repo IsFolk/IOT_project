@@ -7,10 +7,8 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 import configparser
 
-import random
 import json
 import run
-import copy
 import threading
 from pyngrok import ngrok
 
@@ -49,7 +47,6 @@ def callback():
 
     return 'OK'
 
-# 學你說話
 @handler.add(MessageEvent, message=TextMessage)
 def echo(event):
     userId = event.source.user_id
