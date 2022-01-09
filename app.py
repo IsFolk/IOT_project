@@ -3,16 +3,16 @@ import os
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, VideoMessage,VideoSendMessage
 
 import configparser
 
+# import globals
 import json
 import run
 import threading
 from pyngrok import ngrok
 
-import globals
 
 
 app = Flask(__name__)
@@ -37,7 +37,7 @@ def callback():
     
     try:
         print(body, signature)
-        userId = bodyjson["events"][0]["source"]["userId"]
+        #userId = bodyjson["events"][0]["source"]["userId"]
         #print(userId)
         #print(bodyjson["events"][0]["message"]["text"])
         handler.handle(body, signature)
@@ -99,19 +99,15 @@ def echo(event):
                 #print(outcome)
                 if(outcome is not None):
                     line_bot_api.push_message(userId, 
-                          TextSendMessage(text=outcome[0]))
-                    
-                    line_bot_api.push_message(userId, 
-                          {
-                              "type": "video",
-                              "originalContentUrl":"https://www.youtube.com/watch?v=" + globals.youtubeid,
-                              "previewImageUrl": "https://imgur.com/a/lktXXFZ"
-                          })
-                    
-                    
-                 
-                 
+                          TextSendMessage(text=outcome[0]+", 影片已上傳"))
+                    #print(globals.youtubeid)
+                    #line_bot_api.push_message(userId, 
+                          #{
+                              #"type": "video",
+                              #"originalContentUrl":"https://www.youtube.com/watch?v=" + globals.youtubeid,
+                              #"previewImageUrl": "https://imgur.com/HZZCvnv"
+                          #})
+         
     
 if __name__ == "__main__":
-    globals.initialize("")
     app.run()
