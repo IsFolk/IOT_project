@@ -4,7 +4,6 @@ import os
 import random
 import sys
 import time
-import globals
 
 from apiclient.discovery import build
 from apiclient.errors import HttpError
@@ -12,6 +11,8 @@ from apiclient.http import MediaFileUpload
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.file import Storage
 from oauth2client.tools import argparser, run_flow
+
+
 
 
 # Explicitly tell the underlying HTTP transport library not to retry, since
@@ -131,7 +132,6 @@ def resumable_upload(insert_request):
       if response is not None:
         if 'id' in response:
           print ("Video id '%s' was successfully uploaded." % response['id'])
-          globals.initialize(response['id'])
         else:
           exit("The upload failed with an unexpected response: %s" % response)
     except HttpError as e:
