@@ -3,13 +3,11 @@ from datetime import datetime
 import RPi.GPIO as GPIO
 import time
 
-import picam
 from pyngrok import ngrok
 
 from picamera import PiCamera
 from subprocess import call 
 
-import globals
 
 result = datetime.now().strftime("%H:%M:%S")
 print(result)
@@ -173,4 +171,5 @@ def run(time_list):
         return
 
         
+
 
